@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask 2048</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    {% block content %}
+    <h1>2048</h1>
+    <h2 class="score">Score: {{score}}</h2>
+    <div class="message"></div>
+    <button onClick="location.reload();">Reset</button>
+    <table>
+        {% for row in mat %}
+        <tr>
+            {% for cell in row %}
+            <td>
+                {% if cell != 0 %}
+                <div class="cell cell-{{cell}}">{{cell}}</div>
+                {% else %}
+                <div class="cell"></div>
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% endblock %}
+    <script>
+        window.addEventListener("keydown", function (event) {
+
+            var key;
+
+            if (event.code == "ArrowUp" || event.code == "KeyW") {
+                key = "w";
+
+            } else if (event.code == "ArrowLeft" || event.code == "KeyA") {
+
+                key = "a";
+
+            } else if (event.code == "ArrowDown" || event.code == "KeyS") {
+
+                key = "s";
+
+            } else if (event.code == "ArrowRight" || event.code == "KeyD") {
+
+                key = "d";
+
+            }
+
+            if (key != null) {
+
+                fetch('/update-game', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        key: key
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(response => {
+                        console.log(response);
+                        if (response.error) {
+                            console.log(response);
+                        } else {
+                            var cells = document.querySelectorAll('.cell');
+                            for (var row = 0; row < response.mat.length; row++) {
+                                for (var col = 0; col < response.mat[row].length; col++) {
+                                    var cellIndex = row * 4 + col;
+                                    if (response.mat[row][col] != 0) {
+                                        cells[cellIndex].textContent = response.mat[row][col];
+                                        cells[cellIndex].className = "cell cell-" + response.mat[row][col];
+                                    } else {
+                                        cells[cellIndex].textContent = "";
+                                        cells[cellIndex].className = "cell";
+                                    }
+
+                                }
+                            }
+                            document.querySelector('.score').textContent = "Score: " + response.score;
+                            if (response.state == "win") {
+                                document.querySelector('.message').textContent = "You won!";
+                            } else if (response.state == "loss") {
+                                document.querySelector('.message').textContent = "You lost!";
+                            }
+                        }
+
+                    });
+
+            }
+
+        });
+    </script>
+</body>
+
+</html>
