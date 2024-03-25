@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-import sys
 import game
 
 app = Flask(__name__)
@@ -22,7 +21,6 @@ def update():
             mat, pts = game.keys[key](mat)
             score += pts
             game.addnum(mat)
-            print({'mat': mat, 'score': score, 'state': game.state(mat)}, file=sys.stderr)
         return jsonify({'mat': mat, 'score': score, 'state': game.state(mat)})
     return "Not initialized"
 

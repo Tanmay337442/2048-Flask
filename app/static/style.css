@@ -1,6 +1,13 @@
-h1 {
+.title {
     color: orange;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
+    text-align: center;
+}
+
+.score {
+    color: orange;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    text-align: center;
 }
 
 td {
@@ -11,17 +18,27 @@ td {
     border-color: #3c3a32;
 }
 
-div {
+.cell {
     line-height: 100px;
     height: inherit;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
 table {
     background-color: #cdc1b4;
     border: 5px solid;
-    border-collapse: collapse;
-    border-radius: 1%;
+    border-collapse: separate;
     border-color: #3c3a32;
+    border-radius:2%;
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    display: block;
+    margin: auto;
 }
 
 .cell-2 {
