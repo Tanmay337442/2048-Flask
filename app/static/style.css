@@ -2,25 +2,33 @@
     color: orange;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     text-align: center;
+    font-size: 40px;
 }
 
 .score {
     color: orange;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     text-align: center;
+    font-size: 30px;
+}
+
+.message {
+    color: orange;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    text-align: center;
+    font-size: 35px;
 }
 
 td {
     width: 100px;
     height: 100px;
-    text-align: center;
     border: 5px solid;
     border-color: #3c3a32;
+    font-size: 30px;
 }
 
 .cell {
     line-height: 100px;
-    height: inherit;
     text-align: center;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
@@ -30,7 +38,7 @@ table {
     border: 5px solid;
     border-collapse: separate;
     border-color: #3c3a32;
-    border-radius:2%;
+    border-radius: 2%;
     border-spacing: 0;
     margin-left: auto;
     margin-right: auto;
@@ -39,6 +47,26 @@ table {
 button {
     display: block;
     margin: auto;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    transition-duration: 0.5s;
+    background-color: white;
+    color: orange;
+    border: 2px solid orange;
+    padding: 16px 32px;
+}
+
+button:hover {
+    background-color: orange;
+    color: white;
+}
+
+dialog {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px;
+    width: 400px;
 }
 
 .cell-2 {

@@ -14,7 +14,10 @@
     {% block content %}
     <h1 class="title">2048</h1>
     <h2 class="score">Score: {{score}}</h2>
-    <div class="message"></div>
+    <dialog>
+        <p class="message"></p>
+        <button onClick="location.reload();">Reset</button>
+    </dialog>
     <table>
         {% for row in mat %}
         <tr>
@@ -30,8 +33,6 @@
         </tr>
         {% endfor %}
     </table>
-    <br>
-    <button onClick="location.reload();">Reset</button>
     {% endblock %}
     <script>
         window.addEventListener("keydown", function (event) {
@@ -89,8 +90,10 @@
                             document.querySelector('.score').textContent = "Score: " + response.score;
                             if (response.state == "win") {
                                 document.querySelector('.message').textContent = "You won!";
+                                document.querySelector('dialog').showModal();
                             } else if (response.state == "loss") {
                                 document.querySelector('.message').textContent = "You lost!";
+                                document.querySelector('dialog').showModal();
                             }
                         }
 
