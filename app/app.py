@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import game
+import logic
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ mat, score = [None, None]
 @app.route('/')
 def index():
     global mat, score
-    mat, score = game.reset()
+    mat, score = logic.reset()
     return render_template('index.html', mat=mat, score=score)
 
 @app.route('/update-game', methods=['POST'])
@@ -16,12 +16,12 @@ def update():
     global mat, score
     key = request.json.get('key')
     if mat is not None and score is not None:
-        next = game.keys[key](mat)
+        next = logic.keys[key](mat)
         if next[0] != mat:
-            mat, pts = game.keys[key](mat)
+            mat, pts = logic.keys[key](mat)
             score += pts
-            game.addnum(mat)
-        return jsonify({'mat': mat, 'score': score, 'state': game.state(mat)})
+            logic.addnum(mat)
+        return jsonify({'mat': mat, 'score': score, 'state': logic.state(mat)})
     return "Not initialized"
 
 if __name__ == '__main__':
