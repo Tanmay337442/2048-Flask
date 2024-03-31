@@ -1,5 +1,5 @@
 # 2048-Flask
-![screenshot](https://github.com/Tanmay337442/2048-Flask/blob/main/app/static/screenshot.png?raw=true)
+![screenshot](https://github.com/Tanmay337442/2048-Flask/blob/main/app/static/screenshot2.png?raw=true)
 ## Description
 - 2048 webapp made with Python
 ## Required tools
