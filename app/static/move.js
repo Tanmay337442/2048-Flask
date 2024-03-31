@@ -50,14 +50,26 @@ window.addEventListener("keydown", function (event) {
 
                         }
                     }
+
                     document.querySelector('.score').textContent = "Score: " + response.score;
+
+                    var dialog = document.querySelector('dialog')
+                    var message = document.querySelector('.message')
+
                     if (response.state == "win") {
-                        document.querySelector('.message').textContent = "You won!";
-                        document.querySelector('dialog').showModal();
+                        message.textContent = "You won!";
+                        dialog.showModal();
                     } else if (response.state == "loss") {
-                        document.querySelector('.message').textContent = "You lost!";
-                        document.querySelector('dialog').showModal();
+                        message.textContent = "You lost!";
+                        dialog.showModal();
                     }
+
+                    dialog.addEventListener('click', (event) => {
+                        if (event.target.className !== 'modalDiv') {
+                            dialog.close();
+                        }
+                    });
+
                 }
 
             });

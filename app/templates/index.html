@@ -15,8 +15,10 @@
     <h1 class="title">2048</h1>
     <h2 class="score">Score: {{score}}</h2>
     <dialog>
-        <p class="message"></p>
-        <button onClick="location.reload();">Reset</button>
+        <div class="modalDiv">
+            <p class="message"></p>
+            <button onClick="location.reload();">Reset</button>
+        </div>
     </dialog>
     <table>
         {% for row in mat %}
