@@ -1,19 +1,18 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 import logic
 
 app = Flask(__name__)
-
-mat, score = [None, None]
+app.secret_key = 'BAD_SECRET_KEY'
 
 @app.route('/')
 def index():
-    global mat, score
-    mat, score = logic.reset()
-    return render_template('index.html', mat=mat, score=score)
+    session['data'] = logic.reset()
+    return render_template('index.html', mat=session['data'][0], score=session['data'][1])
 
 @app.route('/update-game', methods=['POST'])
 def update():
-    global mat, score
+    mat = session['data'][0]
+    score = session['data'][1]
     key = request.json.get('key')
     if mat is not None and score is not None:
         next = logic.keys[key](mat)
@@ -21,6 +20,7 @@ def update():
             mat, pts = logic.keys[key](mat)
             score += pts
             logic.addnum(mat)
+            session['data'] = mat, score
         return jsonify({'mat': mat, 'score': score, 'state': logic.state(mat)})
     return "Not initialized"
 

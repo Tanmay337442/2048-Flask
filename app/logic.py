@@ -7,7 +7,6 @@ from random import randint, choice
 
 
 def reset():
-    global mat, score
     mat = board()
     score = 0
     return mat, score
